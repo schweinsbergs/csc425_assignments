@@ -1,6 +1,34 @@
+/*** help from: https://www.cs.utah.edu/~germain/PPS/Topics/C_Language/file_IO.html to read files ***/ 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+int main()  {
+
+FILE* a = fopen("testfile.txt", "r");
+
+
+int rc = fork();
+if(rc < 0) {
+fprintf(stderr,"fork failed\n");
+exit(1); 
+
+} else if (rc == 0) {
+
+print(a);
+print("This is child reading!");
+
+} else {
+
+printf(a);
+print("This is parent reading!"); 
+}
+
+return 0;
+
+}
+
 
 
 
