@@ -1,0 +1,27 @@
+/*** help from: https://computer.howstuffworks.com/c6.htm to figure out how to print... :| 
+***/
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main()  {
+
+int counter = 100; 
+
+printf("%d",counter);
+
+
+int rc = fork();
+if(rc < 0) {
+fprintf(stderr,"fork failed\n");
+exit(1); 
+
+} else if (rc == 0) { 
+printf("I am child")
+;
+}
+
+return 0;
+
+}
+
