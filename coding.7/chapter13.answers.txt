@@ -1,0 +1,75 @@
+1. The first Linux tool you should check out is the very simple tool
+free. First, type man free and read its entire manual page; it’s
+short, don’t worry!
+
+x
+
+
+2. Now, run free, perhaps using some of the arguments that might
+be useful (e.g., -m, to display memory totals in megabytes). How
+much memory is in your system? How much is free? Do these
+numbers match your intuition?
+
+
+
+Right now there's 7960 mb free in the system. I wasn't really sure 
+what to expect, so anything was beyond my intuitive guess. I was 
+surprised for a second because I ran it as GB at first, and we have 7gb 
+free and 0's across the board. 
+
+
+3. Next, create a little program that uses a certain amount of memory,
+called memory-user.c. This program should take one commandline argument: the number of megabytes of memory it will use.
+When run, it should allocate an array, and constantly stream through
+the array, touching each entry. The program should do this indefinitely, or, perhaps, for a certain amount of time also specified at the
+command line.
+
+I think I did this. It uh, eats memory and then segmentation faults. I don't blame it. 
+
+
+4. Now, while running your memory-user program, also (in a different terminal window, but on the same machine) run the free
+tool. How do the memory usage totals change when your program
+is running? How about when you kill the memory-user program?
+Do the numbers match your expectations? Try this for different
+amounts of memory usage. What happens when you use really
+large amounts of memory?
+
+You can watch the used memory go up and the free memory go down. In my case, it doesn't seem like a whole lot, I kept running free
+as it was running. 
+Before I ran it, there were 664 mb used, and at peak runtime it had 670 used. Then, when it was done running (or really, hit a
+segmentation error), it was back to 664. The same goes for if I kill it. 
+I expected a lot more memory use, especially because my program looks like an eldritch horror when it runs.  
+
+
+5. Let’s try one more tool, known as pmap. Spend some time, and read
+the pmap manual page in detail.
+
+x
+
+
+6. To use pmap, you have to know the process ID of the process you’re
+interested in. Thus, first run ps auxw to see a list of all processes;
+then, pick an interesting one, such as a browser. You can also use
+your memory-user program in this case (indeed, you can even
+have that program call getpid() and print out its PID for your
+convenience).
+
+Since I have another terminal open to mess around while I edit this file, I got curious as to what 
+the nano into this looked like. So I pmap 183221 -p. 
+
+
+7. Now run pmap on some of these processes, using various flags (like
+-X) to reveal many details about the process. What do you see?
+How many different entities make up a modern address space, as
+opposed to our simple conception of code/stack/heap?
+
+pmap 183221 -p , which is me nanoing in here 
+pmap 183031 -p, which was mahmood2 looking at a readme 
+pmap 182863 -p, which was mahmood2 looking at the man docs for free. 
+
+8. Finally, let’s run pmap on your memory-user program, with different amounts of used memory. What do you see here? Does the
+output from pmap match your expectations?
+
+I think my program isn't quiiite right. I pmaped while it was running a few times. I asked my program to do 30 mb, but when 
+I checked with pmap, it was only doing about 2mb. Then, with 40, it was doing about 14 mb. So it's not quite what I thought would
+meet my expectations, but there definitely is a larger number being used with higher allocations, so...? 
